@@ -118,6 +118,17 @@ lpc11xx_probe(target *t)
 		target_add_ram(t, 0x10000000, 0x2000);
 		lpc11xx_add_flash(t, 0x00000000, 0x8000, 0x400);
 		return true;
+	case 0x00008441:   /* LPC844M201JBD64 */
+	case 0x00008442:   /* LPC844M201JBD48 / LPC844M201JHI48 */
+	case 0x00008444:   /* LPC844M201JHI33 */
+	case 0x00008451:   /* LPC845M301JBD64 */
+	case 0x00008452:   /* LPC845M301JBD48 */
+	case 0x00008453:   /* LPC845M301JHI48 */
+	case 0x00008454:   /* LPC845M301JHI33 */
+		t->driver = "LPC84x";
+		target_add_ram(t, 0x10000000, 0x4000);   /* UM11029 */
+		lpc11xx_add_flash(t, 0x00000000, 0x10000, 0x400);
+		return true;
 	case 0x0003D440:	/* LPC11U34/311  */
 	case 0x0001cc40:	/* LPC11U34/421  */
 	case 0x0001BC40:	/* LPC11U35/401  */
